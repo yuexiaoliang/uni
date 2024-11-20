@@ -79,7 +79,7 @@ onMounted(() => {
   const query = uni.createSelectorQuery().in(instance.proxy);
 
   query
-    .select('.navbar')
+    .select('.wx-navbar')
     .boundingClientRect((data) => {
       placeholderStyles.value = {
         height: `${data.height}px`
@@ -90,19 +90,21 @@ onMounted(() => {
 </script>
 
 <template>
-  <view v-if="fixed" class="navbar__placeholder" :style="placeholderStyles"></view>
+  <view>
+    <view v-if="fixed" class="wx-navbar__placeholder" :style="placeholderStyles"></view>
 
-  <view :class="['navbar', { fixed }]" :style="styles">
-    <view class="navbar__status-bar" :style="statusBarStyles"><slot name="status-bar" /></view>
+    <view :class="['wx-navbar', { fixed }]" :style="styles">
+      <view class="wx-navbar__status-bar" :style="statusBarStyles"><slot name="status-bar" /></view>
 
-    <view v-if="!!menuBarStyles.height" class="navbar__menu-bar" :style="menuBarStyles"><slot name="menu-bar" /></view>
+      <view v-if="!!menuBarStyles.height" class="wx-navbar__menu-bar" :style="menuBarStyles"><slot name="menu-bar" /></view>
 
-    <slot />
+      <slot />
+    </view>
   </view>
 </template>
 
 <style lang="scss">
-.navbar {
+.wx-navbar {
   &.fixed {
     position: fixed;
     top: 0;
@@ -112,7 +114,6 @@ onMounted(() => {
   }
 
   &__placeholder {
-    width: 0;
     z-index: 9999;
   }
 
